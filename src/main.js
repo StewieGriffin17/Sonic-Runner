@@ -1,4 +1,5 @@
 import k from "./kaplayCtx"
+import mainManu from "./scenes/mainManu";
 
 // Loading graphics assets
 k.loadSprite("bg-alt", "graphics/bg-alt.png");
@@ -36,3 +37,12 @@ k.loadSound("hurt", "sounds/hurt.wav");
 k.loadSound("hyperRing", "sounds/hyperRing.wav");
 k.loadSound("jump", "sounds/jump.wav");
 k.loadSound("ring", "sounds/ring.wav");
+
+// Creating scenes
+k.scene("mainManu", mainManu);
+
+k.scene("game", () => {});
+
+k.scene("gameOver", () => {});
+
+k.go("mainManu");  // To go to a specific scene
