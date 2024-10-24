@@ -1,11 +1,9 @@
-import k from "../kaplayCtx";
 import { makeSonic } from "../entities/sonic";
+import k from "../kaplayCtx";
 
-export default function mainManu(){
-    if(!k.getData("bestScore")) k.setData("bestScore", 0);
-    k.onButtonPress("jump", () => k.go("game"));
-    
-    // Setting the background and running platform
+export default function game(){
+    k.setGravity(3100);
+
     const bgPieceWidth = 1920;
     const bgPieces = [
         k.add([
@@ -36,24 +34,22 @@ export default function mainManu(){
         ]),
     ];
 
-    // Adding text
-    k.add([
-        k.text("Sonic Endless Runner", {font: "mania", size: 96}),
-        k.pos(k.center().x, 200),
-        k.anchor("center"),
-    ]);
+    const sonic = makeSonic(k.vec2(200, 650))
+
+    let gameSpeed = 300;
+    k.loop(1, () => {
+        gameSpeed += 50;
+    });
 
     k.add([
-        k.text("Press Space/Click to Play", {font: "mania", size: 48}),
-        k.pos(k.center().x, k.center().y-200),
-        k.anchor("center"),
+        k.rect(1920, 300),
+        k.opacity(0),
+        k.area(),
+        k.pos(0, 770),
+        k.body({isStatic: true}),
     ]);
 
-    // Calling sonic game object
-    makeSonic(k.vec2(200, 650));
-
-    // Making the background and running platform endless
-    k.onUpdate(() =>{
+    k.onUpdate(() => {
         if(bgPieces[1].pos.x < 0){
             bgPieces[0].moveTo(bgPieces[1].pos.x + bgPieceWidth * 2, 0);
             bgPieces.push(bgPieces.shift());
@@ -65,8 +61,7 @@ export default function mainManu(){
             platforms[0].moveTo(platforms[1].pos.x + platformsWidth * 4, 450);
             platforms.push(platforms.shift());
         }
-        platforms[0].move(-3000, 0);
+        platforms[0].move(-gameSpeed, 0);
         platforms[1].moveTo(platforms[0].pos.x + platformsWidth * 4, 450);
     });
-};
- 
+}

@@ -1,4 +1,5 @@
 import k from "./kaplayCtx"
+import game from "./scenes/game";
 import mainManu from "./scenes/mainManu";
 
 // Loading graphics assets
@@ -8,7 +9,7 @@ k.loadSprite("sonic", "graphics/sonic.png", {
     sliceX: 8,
     sliceY: 2,
     anims: {
-        rum : {from: 0, to: 7, loop: true, speed: 30},
+        run : {from: 0, to: 7, loop: true, speed: 30},
         jump : {from: 8, to: 15, loop: true, speed: 100},
     },
 });
@@ -41,7 +42,7 @@ k.loadSound("ring", "sounds/ring.wav");
 // Creating scenes
 k.scene("mainManu", mainManu);
 
-k.scene("game", () => {});
+k.scene("game", game);
 
 k.scene("gameOver", () => {});
 
