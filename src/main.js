@@ -40,10 +40,8 @@ k.loadSound("hyperRing", "sounds/hyperRing.wav");
 k.loadSound("jump", "sounds/jump.wav");
 k.loadSound("ring", "sounds/ring.wav");
 
+// Loading scenes
 k.scene("mainManu", mainManu);
-
 k.scene("game", game);
-
 k.scene("gameOver", gameOver);
-
 k.go("mainManu");

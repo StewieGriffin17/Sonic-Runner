@@ -16,13 +16,12 @@ export default function mainManu(){
         ]),
         k.add([
             k.sprite("bg-alt"), 
-            k.pos(bgPieceWidth * 2, 0), 
+            k.pos(1920, 0), 
             k.scale(2), 
             k.opacity(0.8),
         ]),
     ];
     
-    const platformsWidth = 1280;
     const platforms = [
         k.add([
             k.sprite("platforms-alt"),
@@ -31,7 +30,7 @@ export default function mainManu(){
         ]),
         k.add([
             k.sprite("platforms-alt"),
-            k.pos(platformsWidth * 4, 450),
+            k.pos(0, 450),
             k.scale(4),
         ]),
     ];
@@ -51,7 +50,7 @@ export default function mainManu(){
 
     // Calling sonic game object
     makeSonic(k.vec2(200, 650));
-
+    const gameSpeed = 4000;
     // Making the background and running platform endless
     k.onUpdate(() =>{
         if(bgPieces[1].pos.x < 0){
@@ -62,11 +61,11 @@ export default function mainManu(){
         bgPieces[1].moveTo(bgPieces[0].pos.x + bgPieceWidth * 2, 0);
 
         if(platforms[1].pos.x < 0){
-            platforms[0].moveTo(platforms[1].pos.x + platformsWidth * 4, 450);
+            platforms[0].moveTo(platforms[1].pos.x + platforms[1].width * 4, 450);
             platforms.push(platforms.shift());
         }
-        platforms[0].move(-3000, 0);
-        platforms[1].moveTo(platforms[0].pos.x + platformsWidth * 4, 450);
+        platforms[0].move(-gameSpeed, 0);
+        platforms[1].moveTo(platforms[0].pos.x + platforms[1].width * 4, 450);
     });
 };
  

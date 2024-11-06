@@ -23,7 +23,6 @@ export default function game(){
         ]),
     ];
     
-    const platformsWidth = 1280;
     const platforms = [
         k.add([
             k.sprite("platforms-alt"),
@@ -32,7 +31,7 @@ export default function game(){
         ]),
         k.add([
             k.sprite("platforms-alt"),
-            k.pos(platformsWidth * 4, 450),
+            k.pos(0, 450),
             k.scale(4),
         ]),
     ];
@@ -48,6 +47,7 @@ export default function game(){
     const sonic = makeSonic(k.vec2(200, 650));
     sonic.setControls();
     sonic.setEvents();
+
     sonic.onCollide("enemy", (enemy) => {
         if(!sonic.isGrounded()){
         k.play("destroy", {volume: 0.4});
@@ -122,6 +122,7 @@ export default function game(){
         k.area(),
         k.pos(0, 770),
         k.body({isStatic: true}),
+        "platform",
     ]);
 
     k.onUpdate(() => {
@@ -135,11 +136,14 @@ export default function game(){
         bgPieces[0].move(-100, 0);
         bgPieces[1].moveTo(bgPieces[0].pos.x + bgPieceWidth * 2, 0);
 
+        bgPieces[0].moveTo(bgPieces[0].pos.x, -sonic.pos.y / 10 - 50);
+        bgPieces[1].moveTo(bgPieces[1].pos.x, -sonic.pos.y / 10 - 50);
+
         if(platforms[1].pos.x < 0){
-            platforms[0].moveTo(platforms[1].pos.x + platformsWidth * 4, 450);
+            platforms[0].moveTo(platforms[1].pos.x + platforms[1].width * 4, 450);
             platforms.push(platforms.shift());
         }
         platforms[0].move(-gameSpeed, 0);
-        platforms[1].moveTo(platforms[0].pos.x + platformsWidth * 4, 450);
+        platforms[1].moveTo(platforms[0].pos.x + platforms[1].width * 4, 450);
     });
 }

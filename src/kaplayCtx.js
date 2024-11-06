@@ -13,6 +13,7 @@ const k = kaplay({
             mouse: "left",
         }
     },
+    touchToMouse: true,
     debugKey: "d",
     debug: true,
 });
